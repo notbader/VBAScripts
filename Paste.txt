@@ -1,0 +1,8 @@
+Sub paste()
+'
+' Paste with the target formatting
+'
+'
+Selection.PasteAndFormat (wdFormatPlainText)
+
+End Sub

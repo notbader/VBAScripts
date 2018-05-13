@@ -1,0 +1,15 @@
+Sub DeleteStyles()
+    Dim unused_style As Style
+
+    For Each unused_style In ActiveDocument.Styles
+        
+        If unused_style.BuiltIn = False Then ' to exclude builtin style since they cannot be deleted
+            With ActiveDocument.Content.Find ' find in an active document
+                .ClearFormatting ' To ensure that formatting isn't included as criteria in a find
+                .Style = unused_style.NameLocal ' returns the name of the style in english
+                .Execute FindText:="", Format:=True ' "" is used to find the format
+                If .Found = False Then unused_style.Delete ' if format of the style is not found then delete style
+            End With
+        End If
+    Next unused_style
+End Sub

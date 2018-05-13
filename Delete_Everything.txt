@@ -1,0 +1,14 @@
+Sub DeleteEverything()
+
+    Dim obj As Word.Shape
+    Dim fig As InlineShape
+    For Each obj In ActiveDocument.Shapes
+      obj.Delete
+    Next
+
+    For Each fig In ActiveDocument.InlineShapes ' This and the next 2 lines can be deleted
+                                                ' if you only wish to get rid of the text boxes
+      fig.Delete
+    Next fig
+
+End Sub

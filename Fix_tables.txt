@@ -1,0 +1,28 @@
+Sub fixTables()
+
+  Dim tbl As Table
+  Dim cell As Cells
+  On Error Resume Next
+  For Each tbl In ActiveDocument.Tables
+    tbl.PreferredWidthType = wdPreferredWidthPoints
+    tbl.PreferredWidth = 510.48
+    tbl.Rows.Alignment = wdAlignRowCenter
+    tbl.Rows.Height = 510 / 36
+    tbl.Rows.Select              ' This will not execute if you have vertically merged cells,
+                                     ' The user has to do it manually for the needed tables.
+    
+    tbl.Rows.Borders.OutsideLineStyle = wdLineStyleSingle
+    tbl.Rows.Borders.InsideLineStyle = wdLineStyleSingle
+    
+    Selection.Style = ActiveDocument.Styles("Table_content")
+    tbl.Rows.First.Select
+    Selection.Style = ActiveDocument.Styles("Table_title")
+    tbl.Rows(1).HeadingFormat = True ' This will not execute if you have vertically merged cells,
+                                     ' The user has to do it manually for the needed tables.
+    tbl.Rows(1).Cells.VerticalAlignment = wdCellAlignVerticalCenter
+    tbl.Rows(2).Borders(wdBorderTop).LineStyle = wdLineStyleDouble
+ 
+    
+  Next tbl
+
+End Sub
